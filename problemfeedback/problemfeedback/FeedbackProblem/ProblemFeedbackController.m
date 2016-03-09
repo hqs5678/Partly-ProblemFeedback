@@ -47,15 +47,11 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    if(svImg){
-        return;
-    }
+    
     [self addViews];
     [self setImages];
 }
+
 
 - (void)addViews{
     
@@ -121,6 +117,7 @@
     tvInfo = [[UITextView alloc]initWithFrame:frame];
     tvInfo.textColor = [UIColor darkGrayColor];
     
+    tvInfo.returnKeyType = UIReturnKeyNext;
     [view addSubview:tvInfo];
     
     // 添加图片
@@ -145,7 +142,17 @@
     btn.titleLabel.font = [btn.titleLabel.font fontWithSize:14];
     [btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
     btn.layer.cornerRadius = kRadius;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
+    self.view.userInteractionEnabled = YES;
+    [self.view addGestureRecognizer:tap];
+    
+}
 
+- (void)tap:(UIGestureRecognizer *)recognizer{
+    if (recognizer.view == self.view) {
+        [self.view endEditing:YES];
+    }
 }
 
 - (void)setImages{
@@ -226,7 +233,7 @@
         picker.delegate = self;
         picker.allowsEditing = NO;
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-       
+        
         [self presentViewController:picker animated:YES completion:nil];
     }
     else {
@@ -249,8 +256,8 @@
 - (void)addImageFromThumbnails{
     __weak typeof(self) wSelf=  self;
     SGImagePickerController *imagePickerController = [[SGImagePickerController alloc]init];
-//    imagePickerController.barTintColor = self.titleColor;
-//    imagePickerController.navBarTintColor = self.titleBackgroundColor;
+    //    imagePickerController.barTintColor = self.titleColor;
+    //    imagePickerController.navBarTintColor = self.titleBackgroundColor;
     [imagePickerController setDidFinishSelectImages:^(NSArray *images) {
         if (images && images.count > 0) {
             [wSelf addToImgs:images];
@@ -269,10 +276,13 @@
 }
 
 - (void)submit{
+    [tvInfo endEditing: YES];
+    
     if (self.problemFeedbackDelegate) {
-        [imgs removeLastObject];
+        NSMutableArray *array = [NSMutableArray arrayWithArray:imgs];
+        [array removeLastObject];
         NSMutableDictionary *info = [NSMutableDictionary dictionary];
-        info[@"images"] = imgs;
+        info[@"images"] = array;
         info[@"textContent"] = tvInfo.text;
         [self.problemFeedbackDelegate proglemFeedbackController:self didSubmitInfo:info];
     }
@@ -298,7 +308,7 @@
     backgroundView.contentSize=CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
     [backgroundView addSubview:imageView];
     [window addSubview:backgroundView];
-
+    
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideImage:)];
     [backgroundView addGestureRecognizer: tap];
     
@@ -322,7 +332,7 @@
     }
     
     [scaleImgView setCenter:CGPointMake(scrollView.contentSize.width/2, scrollView.contentSize.height/2)];
-
+    
 }
 // 缩放图片
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
