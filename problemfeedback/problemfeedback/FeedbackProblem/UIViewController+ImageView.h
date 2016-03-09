@@ -1,5 +1,5 @@
 //
-//  UIViewController+Image.h
+//  UIViewController+ImageView.h
 //  problemfeedback
 //
 //  Created by hqs on 16/3/9.
@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIViewController (Image)
+@interface UIViewController (ImageView)
 
-// 现实大图
+// 显示大图片
 -(void)showFullScreenImage:(UIImageView *)imageView;
 
- 
+
 @end

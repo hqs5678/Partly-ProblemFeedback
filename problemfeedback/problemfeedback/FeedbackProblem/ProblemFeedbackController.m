@@ -8,7 +8,7 @@
 
 #import "ProblemFeedbackController.h"
 #import "SGImagePickerController.h"
-#import "UIViewController+Image.h"
+#import "UIViewController+ImageView.h"
 #define kRadius 4
 #define kPadding 5
 
