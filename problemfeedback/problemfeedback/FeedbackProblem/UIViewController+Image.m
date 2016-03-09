@@ -47,11 +47,11 @@ static TmpClass *sharedSingleton = nil;
 
 
 // 显示大图片
--(void)showImage:(UIImageView *)avatarImageView{
-    UIImage *image=avatarImageView.image;
+-(void)showFullScreenImage:(UIImageView *)imgView{
+    UIImage *image=imgView.image;
     UIWindow *window=[UIApplication sharedApplication].keyWindow;
     [TmpClass sharedInstance].backgroundView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    [TmpClass sharedInstance].oldframe=[avatarImageView convertRect:avatarImageView.bounds toView:window];
+    [TmpClass sharedInstance].oldframe=[imgView convertRect:imgView.bounds toView:window];
     
     [TmpClass sharedInstance].backgroundView.backgroundColor=[[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
     [TmpClass sharedInstance].backgroundView.alpha=0;

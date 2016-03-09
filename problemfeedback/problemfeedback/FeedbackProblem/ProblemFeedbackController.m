@@ -196,7 +196,7 @@
     }
     else{
         // 查看大图片
-        [self showImage:imgBtn.imageView];
+        [self showFullScreenImage:imgBtn.imageView];
     }
 }
 

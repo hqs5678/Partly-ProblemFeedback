@@ -11,7 +11,7 @@
 @interface UIViewController (Image)
 
 // 现实大图
--(void)showImage:(UIImageView *)avatarImageView;
+-(void)showFullScreenImage:(UIImageView *)imageView;
 
  
 @end
