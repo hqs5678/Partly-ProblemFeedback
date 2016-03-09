@@ -22,6 +22,7 @@
 		4D1C56931C897DD000A5AD29 /* SGCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1C56881C897DD000A5AD29 /* SGCollectionController.m */; };
 		4D1C56941C897DD000A5AD29 /* SGGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1C568A1C897DD000A5AD29 /* SGGroupCell.m */; };
 		4D1C56951C897DD000A5AD29 /* SGImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1C568C1C897DD000A5AD29 /* SGImagePickerController.m */; };
+		4D71BCAB1C901DAF006E13BD /* UIViewController+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D71BCAA1C901DAF006E13BD /* UIViewController+Image.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,8 @@
 		4D1C568A1C897DD000A5AD29 /* SGGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGGroupCell.m; sourceTree = "<group>"; };
 		4D1C568B1C897DD000A5AD29 /* SGImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGImagePickerController.h; sourceTree = "<group>"; };
 		4D1C568C1C897DD000A5AD29 /* SGImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGImagePickerController.m; sourceTree = "<group>"; };
+		4D71BCA91C901DAF006E13BD /* UIViewController+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Image.h"; sourceTree = "<group>"; };
+		4D71BCAA1C901DAF006E13BD /* UIViewController+Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Image.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +114,8 @@
 				4D1C567E1C897DD000A5AD29 /* minus.png */,
 				4D1C567F1C897DD000A5AD29 /* ProblemFeedbackController.h */,
 				4D1C56801C897DD000A5AD29 /* ProblemFeedbackController.m */,
+				4D71BCA91C901DAF006E13BD /* UIViewController+Image.h */,
+				4D71BCAA1C901DAF006E13BD /* UIViewController+Image.m */,
 				4D1C56811C897DD000A5AD29 /* SGImagePickerController */,
 			);
 			path = FeedbackProblem;
@@ -208,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D71BCAB1C901DAF006E13BD /* UIViewController+Image.m in Sources */,
 				4D1C56951C897DD000A5AD29 /* SGImagePickerController.m in Sources */,
 				4D1C56911C897DD000A5AD29 /* SGAssetModel.m in Sources */,
 				4D1C568F1C897DD000A5AD29 /* ProblemFeedbackController.m in Sources */,
@@ -363,6 +369,7 @@
 				4D1C567B1C897D4D00A5AD29 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

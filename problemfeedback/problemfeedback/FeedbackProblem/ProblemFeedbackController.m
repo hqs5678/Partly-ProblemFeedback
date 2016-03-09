@@ -8,6 +8,7 @@
 
 #import "ProblemFeedbackController.h"
 #import "SGImagePickerController.h"
+#import "UIViewController+Image.h"
 #define kRadius 4
 #define kPadding 5
 
@@ -23,8 +24,6 @@
     CGFloat lastScale;
     UIImageView *scaleImgView;
     UIScrollView *backgroundView;
-    CGFloat firstX;
-    CGFloat firstY;
     
     CGFloat marginTop;
     
@@ -288,71 +287,6 @@
     }
 }
 
-
-// 显示大图片
--(void)showImage:(UIImageView *)avatarImageView{
-    UIImage *image=avatarImageView.image;
-    UIWindow *window=[UIApplication sharedApplication].keyWindow;
-    backgroundView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    oldframe=[avatarImageView convertRect:avatarImageView.bounds toView:window];
-    
-    backgroundView.backgroundColor=[[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
-    backgroundView.alpha=0;
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:oldframe];
-    imageView.image=image;
-    imageView.tag=1;
-    scaleImgView = imageView;
-    backgroundView.delegate = self;
-    backgroundView.maximumZoomScale = 4;
-    backgroundView.minimumZoomScale = 1;
-    backgroundView.contentSize=CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
-    [backgroundView addSubview:imageView];
-    [window addSubview:backgroundView];
-    
-    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideImage:)];
-    [backgroundView addGestureRecognizer: tap];
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        imageView.frame=CGRectMake(0,(SCREEN_HEIGHT-image.size.height*SCREEN_WIDTH/image.size.width) * 0.5, SCREEN_WIDTH, image.size.height*SCREEN_WIDTH/image.size.width);
-        backgroundView.alpha=1;
-    } completion:^(BOOL finished) {
-        
-    }];
-}
-
-
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView{
-    if (scrollView.contentSize.height<SCREEN_HEIGHT && scrollView.contentSize.width>=SCREEN_WIDTH) {
-        [scrollView setContentSize:CGSizeMake(scrollView.contentSize.width, SCREEN_HEIGHT)];
-    }
-    else if (scrollView.contentSize.width<SCREEN_WIDTH) {
-        [scrollView setContentSize:CGSizeMake(SCREEN_WIDTH,SCREEN_HEIGHT)];
-    }
-    else{
-    }
-    
-    [scaleImgView setCenter:CGPointMake(scrollView.contentSize.width/2, scrollView.contentSize.height/2)];
-    
-}
-// 缩放图片
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
-    return scaleImgView;
-}
-
-// 隐藏图片
--(void)hideImage:(UITapGestureRecognizer*)tap{
-    [UIView animateWithDuration:backgroundView.zoomScale/24 animations:^{
-        backgroundView.zoomScale = 1;
-    } completion:^(BOOL finished) {
-        UIImageView *imageView=(UIImageView*)[tap.view viewWithTag:1];
-        [UIView animateWithDuration:0.3 animations:^{
-            imageView.frame=oldframe;
-            backgroundView.alpha=0;
-        } completion:^(BOOL finished) {
-            [backgroundView removeFromSuperview];
-        }];
-    }];
-}
 
 - (void)back{
     if (self.problemFeedbackDelegate) {
